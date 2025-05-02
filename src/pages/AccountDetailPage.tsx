@@ -185,7 +185,7 @@ const AccountDetailPage = () => {
         </Card>
       </div>
 
-      {/* New DataGrid for detailed account information */}
+      {/* DataGrid for detailed account information */}
       <Card>
         <CardHeader>
           <CardTitle>Détails complets du compte</CardTitle>

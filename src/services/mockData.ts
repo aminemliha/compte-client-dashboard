@@ -1,4 +1,3 @@
-
 export interface AccountData {
   id: number;
   numeroOriginal: string;
@@ -18,6 +17,15 @@ export interface AccountData {
   adresse?: string;
   telephone?: string;
   email?: string;
+  subscription?: string;
+  overdraftLimit?: number;
+  lastActivity?: string;
+  cards?: Array<{
+    type: string;
+    number: string;
+    expiry: string;
+    status: string;
+  }>;
 }
 
 // Generate mock data
@@ -35,6 +43,27 @@ const generateMockData = (count: number): AccountData[] => {
     const nationalities = ['maroc', 'france', 'espagne', 'autre'];
     const statuses = ['actif', 'inactif', 'bloqué', 'en attente'];
     const devises = ['MAD', 'EUR', 'USD'];
+    const subscriptions = ['Standard', 'Premium', 'Gold', 'Platinum'];
+    const cardTypes = ['Visa', 'Visa Premium', 'Mastercard', 'American Express'];
+    
+    // Generate random cards
+    const cardCount = Math.floor(Math.random() * 3) + 1;
+    const cards = [];
+    for (let j = 0; j < cardCount; j++) {
+      const cardType = cardTypes[Math.floor(Math.random() * cardTypes.length)];
+      const cardNumber = `${Math.floor(Math.random() * 9000) + 1000} **** **** ${Math.floor(Math.random() * 9000) + 1000}`;
+      const month = Math.floor(Math.random() * 12) + 1;
+      const year = Math.floor(Math.random() * 5) + 23;
+      const expiry = `${month.toString().padStart(2, '0')}/${year}`;
+      const cardStatus = Math.random() > 0.1 ? 'Active' : 'Inactive';
+      
+      cards.push({
+        type: cardType,
+        number: cardNumber,
+        expiry: expiry,
+        status: cardStatus
+      });
+    }
     
     data.push({
       id,
@@ -54,7 +83,11 @@ const generateMockData = (count: number): AccountData[] => {
       devise: devises[Math.floor(Math.random() * devises.length)],
       adresse: `${Math.floor(Math.random() * 999) + 1} Rue ${Math.floor(Math.random() * 100) + 1}, Casablanca`,
       telephone: `+212 ${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 900 + 100)}`,
-      email: `client${id}@example.com`
+      email: `client${id}@example.com`,
+      subscription: subscriptions[Math.floor(Math.random() * subscriptions.length)],
+      overdraftLimit: Math.random() > 0.7 ? Math.floor(Math.random() * 50000) : 0,
+      lastActivity: Math.random() > 0.2 ? new Date(Date.now() - Math.floor(Math.random() * 30 * 24 * 60 * 60 * 1000)).toISOString().split('T')[0] : null,
+      cards: cards
     });
   }
   
