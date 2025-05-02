@@ -1,6 +1,6 @@
 
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { useSearchData } from '@/hooks/useSearchData';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
@@ -8,6 +8,9 @@ import { ChevronLeft, ChevronRight, Eye } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const DataPage = () => {
+  const location = useLocation();
+  const initialFilters = location.state?.filters || {};
+  
   const { 
     accounts, 
     loading, 
@@ -15,8 +18,16 @@ const DataPage = () => {
     totalCount, 
     page, 
     pageSize, 
-    setPage 
-  } = useSearchData();
+    setPage,
+    setFilters
+  } = useSearchData({ initialFilters });
+
+  // Apply filters from navigation state when component mounts
+  useEffect(() => {
+    if (location.state?.filters) {
+      setFilters(location.state.filters);
+    }
+  }, [location.state?.filters, setFilters]);
 
   const totalPages = Math.ceil(totalCount / pageSize);
 

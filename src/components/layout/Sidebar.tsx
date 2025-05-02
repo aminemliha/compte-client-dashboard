@@ -1,5 +1,6 @@
 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -17,6 +18,7 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ open }: SidebarProps) => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     agenceCode: "",
     bilan: "",
@@ -34,7 +36,8 @@ const Sidebar = ({ open }: SidebarProps) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Search filters:", formData);
-    // This will be connected to the search service
+    // Navigate to the data page to show search results
+    navigate("/data", { state: { filters: formData } });
   };
 
   if (!open) return null;
