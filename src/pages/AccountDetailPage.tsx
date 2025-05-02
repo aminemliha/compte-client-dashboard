@@ -4,6 +4,8 @@ import { useAccountDetails } from '@/hooks/useAccountDetails';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft } from 'lucide-react';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const AccountDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -45,6 +47,25 @@ const AccountDetailPage = () => {
       </div>
     );
   }
+
+  // Generate account details data for the DataGrid
+  const accountDetailsData = [
+    { label: "Numéro Original", value: account.numeroOriginal },
+    { label: "Numéro Client Host", value: account.numeroClientHost },
+    { label: "Numéro avec Lettres", value: account.numeroAvecLettres },
+    { label: "Code Agence", value: account.agenceCode },
+    { label: "Date de Création", value: account.dateCreation },
+    { label: "Statut", value: account.status },
+    { label: "Abonnement", value: account.subscription || "Standard" },
+    { label: "Limite de Découvert", value: `${account.overdraftLimit || 0} ${account.devise}` },
+    { label: "Dernière Activité", value: account.lastActivity || "N/A" },
+  ];
+
+  // Generate cards data if available
+  const cardData = account.cards || [
+    { type: "Visa Premium", number: "4901 **** **** 3456", expiry: "12/25", status: "Active" },
+    { type: "Mastercard", number: "5123 **** **** 6789", expiry: "08/24", status: "Active" }
+  ];
 
   return (
     <div className="space-y-4">
@@ -163,6 +184,64 @@ const AccountDetailPage = () => {
           </CardContent>
         </Card>
       </div>
+
+      {/* New DataGrid for detailed account information */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Détails complets du compte</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="rounded-md border overflow-hidden">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="w-1/3">Information</TableHead>
+                  <TableHead className="w-2/3">Valeur</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {accountDetailsData.map((item, index) => (
+                  <TableRow key={index}>
+                    <TableCell className="font-medium">{item.label}</TableCell>
+                    <TableCell>{item.value}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Cards DataGrid */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Cartes bancaires associées</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="rounded-md border overflow-hidden">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Type</TableHead>
+                  <TableHead>Numéro</TableHead>
+                  <TableHead>Expiration</TableHead>
+                  <TableHead>Statut</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {cardData.map((card, index) => (
+                  <TableRow key={index}>
+                    <TableCell>{card.type}</TableCell>
+                    <TableCell>{card.number}</TableCell>
+                    <TableCell>{card.expiry}</TableCell>
+                    <TableCell>{card.status}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };
