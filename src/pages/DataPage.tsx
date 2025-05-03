@@ -172,7 +172,11 @@ const DataPage = () => {
                   <PaginationContent>
                     <PaginationItem>
                       <PaginationPrevious 
-                        onClick={handlePreviousPage}
+                        href="#" 
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handlePreviousPage();
+                        }}
                         className={page <= 1 ? "pointer-events-none opacity-50" : "cursor-pointer"}
                         aria-disabled={page <= 1}
                       />
@@ -184,8 +188,12 @@ const DataPage = () => {
                           <span className="flex h-9 w-9 items-center justify-center">...</span>
                         ) : (
                           <PaginationLink 
+                            href="#"
                             isActive={pageNumber === page}
-                            onClick={() => typeof pageNumber === 'number' && setPage(pageNumber)}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              typeof pageNumber === 'number' && setPage(pageNumber);
+                            }}
                             className="cursor-pointer"
                           >
                             {pageNumber}
@@ -196,7 +204,11 @@ const DataPage = () => {
                     
                     <PaginationItem>
                       <PaginationNext 
-                        onClick={handleNextPage}
+                        href="#" 
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleNextPage();
+                        }}
                         className={page >= totalPages ? "pointer-events-none opacity-50" : "cursor-pointer"}
                         aria-disabled={page >= totalPages}
                       />
