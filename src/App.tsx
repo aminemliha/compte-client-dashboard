@@ -12,6 +12,7 @@ import AccountDetailPage from "./pages/AccountDetailPage";
 import VentePage from "./pages/VentePage";
 import VenteDetailsPage from "./pages/VenteDetailsPage";
 import NotFound from "./pages/NotFound";
+import SelfcarePage from "./pages/SelfcarePage";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,7 @@ const App = () => (
             <Route path="data/:id" element={<AccountDetailPage />} />
             <Route path="vente" element={<VentePage />} />
             <Route path="vente/details" element={<VenteDetailsPage />} />
+            <Route path="selfcare" element={<SelfcarePage />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

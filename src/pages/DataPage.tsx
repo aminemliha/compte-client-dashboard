@@ -4,8 +4,9 @@ import { Link, useLocation } from 'react-router-dom';
 import { useSearchData } from '@/hooks/useSearchData';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { ChevronLeft, ChevronRight, Eye } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Eye, Search } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
 import {
   Pagination,
   PaginationContent,
@@ -18,6 +19,7 @@ import {
 const DataPage = () => {
   const location = useLocation();
   const initialFilters = location.state?.filters || {};
+  const [searchQuery, setSearchQuery] = useState('');
   
   const { 
     accounts, 
@@ -49,6 +51,11 @@ const DataPage = () => {
     if (page < totalPages) {
       setPage(page + 1);
     }
+  };
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    setFilters({ ...initialFilters, numeroClientHost: searchQuery });
   };
 
   // Generate page numbers for pagination
@@ -94,7 +101,22 @@ const DataPage = () => {
 
   return (
     <div className="space-y-4">
-      <h1 className="text-2xl font-bold">Résultats de recherche</h1>
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-bold">Résultats de recherche</h1>
+        
+        <form onSubmit={handleSearch} className="flex w-full max-w-sm items-center space-x-2">
+          <div className="relative flex-1">
+            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-500" />
+            <Input
+              placeholder="Recherche rapide par numéro client..."
+              className="w-full pl-9 h-10 bg-gray-50"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+          <Button type="submit" size="sm">Rechercher</Button>
+        </form>
+      </div>
       
       <Card>
         <CardHeader>
@@ -144,7 +166,7 @@ const DataPage = () => {
                 </Table>
               </div>
               
-              {/* Improved pagination with shadcn/ui components */}
+              {/* Pagination section */}
               <div className="mt-4">
                 <Pagination>
                   <PaginationContent>
