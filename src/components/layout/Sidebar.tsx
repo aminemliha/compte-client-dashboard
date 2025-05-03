@@ -11,14 +11,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Search, X } from "lucide-react";
+import { Search, X, PanelLeft } from "lucide-react";
 
 interface SidebarProps {
   open: boolean;
-  onClose?: () => void;
+  onToggle: () => void;
 }
 
-const Sidebar = ({ open, onClose }: SidebarProps) => {
+const Sidebar = ({ open, onToggle }: SidebarProps) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     agenceCode: "",
@@ -41,23 +41,35 @@ const Sidebar = ({ open, onClose }: SidebarProps) => {
     navigate("/data", { state: { filters: formData } });
   };
 
-  if (!open) return null;
+  if (!open) {
+    return (
+      <div className="h-[calc(100vh-64px)] fixed md:relative">
+        <Button 
+          onClick={onToggle}
+          variant="ghost" 
+          size="icon"
+          className="m-2"
+        >
+          <PanelLeft className="h-4 w-4" />
+          <span className="sr-only">Ouvrir</span>
+        </Button>
+      </div>
+    );
+  }
 
   return (
     <aside className="w-64 bg-white border-r border-gray-200 p-4 transition-all duration-200 overflow-auto h-[calc(100vh-64px)] fixed md:relative">
       <div className="flex justify-between items-center mb-4">
         <h2 className="font-semibold text-lg">Filtres</h2>
-        {onClose && (
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            onClick={onClose} 
-            className="h-8 w-8"
-          >
-            <X className="h-4 w-4" />
-            <span className="sr-only">Fermer</span>
-          </Button>
-        )}
+        <Button 
+          variant="ghost" 
+          size="icon" 
+          onClick={onToggle} 
+          className="h-8 w-8"
+        >
+          <X className="h-4 w-4" />
+          <span className="sr-only">Fermer</span>
+        </Button>
       </div>
       
       <form onSubmit={handleSubmit} className="space-y-4">

@@ -1,6 +1,6 @@
 
 import { Link } from "react-router-dom";
-import { Menu, Search, X } from "lucide-react";
+import { Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -14,14 +14,6 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }: NavbarProps) => {
     <header className="w-full bg-white border-b border-gray-200 sticky top-0 z-50">
       <div className="flex items-center justify-between px-4 h-16">
         <div className="flex items-center">
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="mr-2"
-          >
-            {sidebarOpen ? <X size={20} /> : <Menu size={20} />}
-          </Button>
           <Link to="/" className="flex items-center gap-2">
             <span className="font-bold text-xl text-brand-black">
               Attijariwafa Bank

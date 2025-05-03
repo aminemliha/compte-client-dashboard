@@ -7,15 +7,15 @@ import Sidebar from "./Sidebar";
 const RootLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   
-  const handleCloseSidebar = () => {
-    setSidebarOpen(false);
+  const handleToggleSidebar = () => {
+    setSidebarOpen(prevState => !prevState);
   };
   
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       <div className="flex flex-1">
-        <Sidebar open={sidebarOpen} onClose={handleCloseSidebar} />
+        <Sidebar open={sidebarOpen} onToggle={handleToggleSidebar} />
         <main className="flex-1 p-4 md:p-6 transition-all duration-200"
               style={{ marginLeft: sidebarOpen ? "" : "0" }}>
           <Outlet />
