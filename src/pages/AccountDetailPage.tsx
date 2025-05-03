@@ -48,23 +48,27 @@ const AccountDetailPage = () => {
     );
   }
 
-  // Generate account details data for the DataGrid
+  // Generate unified data for the single DataGrid including all account information
   const accountDetailsData = [
     { label: "Numéro Original", value: account.numeroOriginal },
     { label: "Numéro Client Host", value: account.numeroClientHost },
     { label: "Numéro avec Lettres", value: account.numeroAvecLettres },
     { label: "Code Agence", value: account.agenceCode },
+    { label: "Bilan", value: account.bilan },
+    { label: "Nationalité", value: account.nationality },
+    { label: "Âge", value: `${account.age} ans` },
+    { label: "Type de Client", value: account.clientType },
+    { label: "Marché", value: account.market },
+    { label: "Segment", value: account.segment },
     { label: "Date de Création", value: account.dateCreation },
     { label: "Statut", value: account.status },
+    { label: "Solde", value: `${account.solde.toLocaleString()} ${account.devise}` },
+    { label: "Adresse", value: account.adresse || "N/A" },
+    { label: "Téléphone", value: account.telephone || "N/A" },
+    { label: "Email", value: account.email || "N/A" },
     { label: "Abonnement", value: account.subscription || "Standard" },
     { label: "Limite de Découvert", value: `${account.overdraftLimit || 0} ${account.devise}` },
-    { label: "Dernière Activité", value: account.lastActivity || "N/A" },
-  ];
-
-  // Generate cards data if available
-  const cardData = account.cards || [
-    { type: "Visa Premium", number: "4901 **** **** 3456", expiry: "12/25", status: "Active" },
-    { type: "Mastercard", number: "5123 **** **** 6789", expiry: "08/24", status: "Active" }
+    { label: "Dernière Activité", value: account.lastActivity || "N/A" }
   ];
 
   return (
@@ -79,116 +83,10 @@ const AccountDetailPage = () => {
         <h1 className="text-2xl font-bold">Détails du compte</h1>
       </div>
       
-      <div className="grid gap-4 md:grid-cols-2">
-        <Card>
-          <CardHeader>
-            <CardTitle>Informations générales</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-2">
-              <div className="grid grid-cols-2 gap-1">
-                <span className="text-muted-foreground">Numéro Original:</span>
-                <span className="font-medium">{account.numeroOriginal}</span>
-              </div>
-              <div className="grid grid-cols-2 gap-1">
-                <span className="text-muted-foreground">Numéro Client Host:</span>
-                <span className="font-medium">{account.numeroClientHost}</span>
-              </div>
-              <div className="grid grid-cols-2 gap-1">
-                <span className="text-muted-foreground">Numéro avec Lettres:</span>
-                <span className="font-medium">{account.numeroAvecLettres}</span>
-              </div>
-              <div className="grid grid-cols-2 gap-1">
-                <span className="text-muted-foreground">Date de création:</span>
-                <span className="font-medium">{account.dateCreation}</span>
-              </div>
-              <div className="grid grid-cols-2 gap-1">
-                <span className="text-muted-foreground">Statut:</span>
-                <span className="font-medium">{account.status}</span>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Données financières</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-2">
-              <div className="grid grid-cols-2 gap-1">
-                <span className="text-muted-foreground">Code Agence:</span>
-                <span className="font-medium">{account.agenceCode}</span>
-              </div>
-              <div className="grid grid-cols-2 gap-1">
-                <span className="text-muted-foreground">Bilan:</span>
-                <span className="font-medium">{account.bilan}</span>
-              </div>
-              <div className="grid grid-cols-2 gap-1">
-                <span className="text-muted-foreground">Solde:</span>
-                <span className="font-medium">{account.solde.toLocaleString()} {account.devise}</span>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Profil client</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-2">
-              <div className="grid grid-cols-2 gap-1">
-                <span className="text-muted-foreground">Nationalité:</span>
-                <span className="font-medium capitalize">{account.nationality}</span>
-              </div>
-              <div className="grid grid-cols-2 gap-1">
-                <span className="text-muted-foreground">Âge:</span>
-                <span className="font-medium">{account.age} ans</span>
-              </div>
-              <div className="grid grid-cols-2 gap-1">
-                <span className="text-muted-foreground">Type de client:</span>
-                <span className="font-medium capitalize">{account.clientType}</span>
-              </div>
-              <div className="grid grid-cols-2 gap-1">
-                <span className="text-muted-foreground">Marché:</span>
-                <span className="font-medium">{account.market}</span>
-              </div>
-              <div className="grid grid-cols-2 gap-1">
-                <span className="text-muted-foreground">Segment:</span>
-                <span className="font-medium capitalize">{account.segment}</span>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Contact</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-2">
-              <div className="grid grid-cols-2 gap-1">
-                <span className="text-muted-foreground">Adresse:</span>
-                <span className="font-medium">{account.adresse || 'N/A'}</span>
-              </div>
-              <div className="grid grid-cols-2 gap-1">
-                <span className="text-muted-foreground">Téléphone:</span>
-                <span className="font-medium">{account.telephone || 'N/A'}</span>
-              </div>
-              <div className="grid grid-cols-2 gap-1">
-                <span className="text-muted-foreground">Email:</span>
-                <span className="font-medium">{account.email || 'N/A'}</span>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* DataGrid for detailed account information */}
+      {/* Single DataGrid containing all account information */}
       <Card>
         <CardHeader>
-          <CardTitle>Détails complets du compte</CardTitle>
+          <CardTitle>Informations complètes du compte</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="rounded-md border overflow-hidden">
@@ -229,14 +127,20 @@ const AccountDetailPage = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {cardData.map((card, index) => (
-                  <TableRow key={index}>
-                    <TableCell>{card.type}</TableCell>
-                    <TableCell>{card.number}</TableCell>
-                    <TableCell>{card.expiry}</TableCell>
-                    <TableCell>{card.status}</TableCell>
+                {account.cards && account.cards.length > 0 ? (
+                  account.cards.map((card, index) => (
+                    <TableRow key={index}>
+                      <TableCell>{card.type}</TableCell>
+                      <TableCell>{card.number}</TableCell>
+                      <TableCell>{card.expiry}</TableCell>
+                      <TableCell>{card.status}</TableCell>
+                    </TableRow>
+                  ))
+                ) : (
+                  <TableRow>
+                    <TableCell colSpan={4} className="text-center">Aucune carte associée</TableCell>
                   </TableRow>
-                ))}
+                )}
               </TableBody>
             </Table>
           </div>
