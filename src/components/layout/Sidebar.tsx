@@ -11,13 +11,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Search } from "lucide-react";
+import { Search, X } from "lucide-react";
 
 interface SidebarProps {
   open: boolean;
+  onClose?: () => void;
 }
 
-const Sidebar = ({ open }: SidebarProps) => {
+const Sidebar = ({ open, onClose }: SidebarProps) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     agenceCode: "",
@@ -44,7 +45,20 @@ const Sidebar = ({ open }: SidebarProps) => {
 
   return (
     <aside className="w-64 bg-white border-r border-gray-200 p-4 transition-all duration-200 overflow-auto h-[calc(100vh-64px)] fixed md:relative">
-      <h2 className="font-semibold text-lg mb-6">Filtres</h2>
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="font-semibold text-lg">Filtres</h2>
+        {onClose && (
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            onClick={onClose} 
+            className="h-8 w-8"
+          >
+            <X className="h-4 w-4" />
+            <span className="sr-only">Fermer</span>
+          </Button>
+        )}
+      </div>
       
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-2">
