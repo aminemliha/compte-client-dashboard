@@ -7,6 +7,7 @@ import { VenteWelcomeContent } from "@/components/vente/VenteWelcomeContent";
 const VentePage = () => {
   const [searchResults, setSearchResults] = useState<VenteClient[]>([]);
   const [hasSearched, setHasSearched] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
 
   const handleSearch = (params: VenteSearchParams) => {
     console.log("Search params:", params);
@@ -49,13 +50,22 @@ const VentePage = () => {
     setHasSearched(true);
   };
 
+  const handleToggleSidebar = () => {
+    setSidebarOpen(prevState => !prevState);
+  };
+
   return (
-    <div className="flex gap-4">
+    <div className="flex gap-4 mt-4">
       {/* Custom Sidebar for Vente */}
-      <VenteSearchSidebar onSearch={handleSearch} />
+      <VenteSearchSidebar 
+        onSearch={handleSearch} 
+        open={sidebarOpen} 
+        onToggle={handleToggleSidebar} 
+      />
 
       {/* Main content */}
-      <div className="flex-1 overflow-auto">
+      <div className="flex-1 overflow-auto p-2 md:p-4" 
+           style={{ marginLeft: sidebarOpen ? "" : "0" }}>
         {!hasSearched ? (
           <VenteWelcomeContent />
         ) : (
