@@ -58,8 +58,8 @@ const Sidebar = ({ open, onToggle }: SidebarProps) => {
   }
 
   return (
-    <aside className="w-64 bg-white border-r border-gray-200 p-4 transition-all duration-200 overflow-auto h-[calc(100vh-64px)] fixed md:relative">
-      <div className="flex justify-between items-center mb-4">
+    <aside className="w-64 bg-white border-r border-gray-200 p-4 transition-all duration-200 h-[calc(100vh-64px)] fixed md:relative">
+      <div className="flex justify-between items-center mb-3">
         <h2 className="font-semibold text-lg">Filtres</h2>
         <Button 
           variant="ghost" 
@@ -72,8 +72,8 @@ const Sidebar = ({ open, onToggle }: SidebarProps) => {
         </Button>
       </div>
       
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="space-y-2">
+      <form onSubmit={handleSubmit} className="space-y-3">
+        <div className="space-y-1">
           <Label htmlFor="agenceCode">Code Agence</Label>
           <Input
             id="agenceCode"
@@ -83,7 +83,7 @@ const Sidebar = ({ open, onToggle }: SidebarProps) => {
           />
         </div>
 
-        <div className="space-y-2">
+        <div className="space-y-1">
           <Label htmlFor="bilan">Bilan</Label>
           <Input
             id="bilan"
@@ -93,7 +93,7 @@ const Sidebar = ({ open, onToggle }: SidebarProps) => {
           />
         </div>
 
-        <div className="space-y-2">
+        <div className="space-y-1">
           <Label htmlFor="nationality">Nationalité</Label>
           <Select
             value={formData.nationality}
@@ -111,7 +111,7 @@ const Sidebar = ({ open, onToggle }: SidebarProps) => {
           </Select>
         </div>
 
-        <div className="space-y-2">
+        <div className="space-y-1">
           <Label htmlFor="minAge">Âge Minimum</Label>
           <Input
             id="minAge"
@@ -122,7 +122,7 @@ const Sidebar = ({ open, onToggle }: SidebarProps) => {
           />
         </div>
 
-        <div className="space-y-2">
+        <div className="space-y-1">
           <Label htmlFor="clientType">Type de Client</Label>
           <Select
             value={formData.clientType}
@@ -139,7 +139,7 @@ const Sidebar = ({ open, onToggle }: SidebarProps) => {
           </Select>
         </div>
 
-        <div className="space-y-2">
+        <div className="space-y-1">
           <Label htmlFor="market">Marché</Label>
           <Input
             id="market"
@@ -149,7 +149,7 @@ const Sidebar = ({ open, onToggle }: SidebarProps) => {
           />
         </div>
 
-        <div className="space-y-2">
+        <div className="space-y-1">
           <Label htmlFor="segment">Segment</Label>
           <Select
             value={formData.segment}
@@ -168,7 +168,7 @@ const Sidebar = ({ open, onToggle }: SidebarProps) => {
 
         <Button 
           type="submit" 
-          className="w-full bg-brand-orange hover:bg-brand-yellow text-white font-medium"
+          className="w-full bg-brand-orange hover:bg-brand-yellow text-white font-medium mt-4"
         >
           <Search className="mr-2 h-4 w-4" /> Rechercher
         </Button>

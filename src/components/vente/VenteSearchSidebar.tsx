@@ -45,11 +45,11 @@ export const VenteSearchSidebar = ({ onSearch }: VenteSearchSidebarProps) => {
   };
 
   return (
-    <div className="w-64 bg-white border-r border-gray-200 p-4 h-[calc(100vh-64px)] overflow-auto">
-      <div className="mb-4">
-        <h2 className="font-semibold text-lg mb-4">Recherche de Vente</h2>
-        <form onSubmit={handleSearch} className="space-y-4">
-          <div className="space-y-2">
+    <div className="w-64 bg-white border-r border-gray-200 p-4 h-[calc(100vh-64px)] fixed md:relative">
+      <div className="mb-3">
+        <h2 className="font-semibold text-lg mb-3">Recherche de Vente</h2>
+        <form onSubmit={handleSearch} className="space-y-3">
+          <div className="space-y-1">
             <Label htmlFor="numeroCompteSupport">Numéro de Compte Support</Label>
             <Input
               id="numeroCompteSupport"
@@ -59,7 +59,7 @@ export const VenteSearchSidebar = ({ onSearch }: VenteSearchSidebarProps) => {
             />
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-1">
             <Label htmlFor="codeAgence">Code Agence</Label>
             <Input
               id="codeAgence"
@@ -69,7 +69,7 @@ export const VenteSearchSidebar = ({ onSearch }: VenteSearchSidebarProps) => {
             />
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-1">
             <Label htmlFor="clientIdHost">Client-id-Host</Label>
             <Input
               id="clientIdHost"
@@ -79,7 +79,7 @@ export const VenteSearchSidebar = ({ onSearch }: VenteSearchSidebarProps) => {
             />
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-1">
             <Label htmlFor="statut">Statut</Label>
             <Select
               value={searchParams.statut}
@@ -96,7 +96,7 @@ export const VenteSearchSidebar = ({ onSearch }: VenteSearchSidebarProps) => {
             </Select>
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-1">
             <Label htmlFor="productCode">Product Code</Label>
             <Select
               value={searchParams.productCode}
@@ -113,7 +113,7 @@ export const VenteSearchSidebar = ({ onSearch }: VenteSearchSidebarProps) => {
             </Select>
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-1">
             <Label htmlFor="phase">Phase</Label>
             <Select
               value={searchParams.phase}
@@ -132,7 +132,7 @@ export const VenteSearchSidebar = ({ onSearch }: VenteSearchSidebarProps) => {
 
           <Button 
             type="submit" 
-            className="w-full bg-[#ed5f49] hover:bg-[#ed5f49]/90"
+            className="w-full bg-[#ed5f49] hover:bg-[#ed5f49]/90 mt-4"
           >
             <Search className="mr-2 h-4 w-4" /> Rechercher
           </Button>

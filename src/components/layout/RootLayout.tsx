@@ -22,7 +22,7 @@ const RootLayout = () => {
         {shouldShowMainSidebar && (
           <Sidebar open={sidebarOpen} onToggle={handleToggleSidebar} />
         )}
-        <main className="flex-1 p-4 md:p-6 transition-all duration-200"
+        <main className="flex-1 p-3 md:p-4 lg:p-6 transition-all duration-200 overflow-auto"
               style={{ marginLeft: sidebarOpen && shouldShowMainSidebar ? "" : "0" }}>
           <Outlet />
         </main>

@@ -15,29 +15,31 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }: NavbarProps) => {
       <div className="flex items-center justify-between px-4 h-16">
         <div className="flex items-center">
           <Link to="/" className="flex items-center gap-2">
-            <span className="font-bold text-xl text-white">
-              Attijariwafa Bank
-            </span>
+            <img 
+              src="/logo-attijariwafa.png" 
+              alt="Attijariwafa Bank Logo" 
+              className="h-8 w-auto"
+            />
           </Link>
         </div>
 
-        <div className="flex items-center justify-center gap-8">
+        <div className="flex items-center justify-center gap-4 md:gap-8">
           <Button variant="ghost" size="sm" className="text-white hover:bg-[#ed5f49]/80" asChild>
             <Link to="/" className="flex items-center gap-1">
               <Home size={18} />
-              <span>Accueil</span>
+              <span className="hidden sm:inline">Accueil</span>
             </Link>
           </Button>
           <Button variant="ghost" size="sm" className="text-white hover:bg-[#ed5f49]/80" asChild>
             <Link to="/vente" className="flex items-center gap-1">
               <ShoppingBag size={18} />
-              <span>Vente</span>
+              <span className="hidden sm:inline">Vente</span>
             </Link>
           </Button>
           <Button variant="ghost" size="sm" className="text-white hover:bg-[#ed5f49]/80" asChild>
             <Link to="/selfcare" className="flex items-center gap-1">
               <User size={18} />
-              <span>Selfcare</span>
+              <span className="hidden sm:inline">Selfcare</span>
             </Link>
           </Button>
         </div>
