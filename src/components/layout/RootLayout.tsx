@@ -18,7 +18,7 @@ const RootLayout = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-      <div className="flex flex-1 mt-2">
+      <div className="flex flex-1">
         {shouldShowMainSidebar && (
           <Sidebar open={sidebarOpen} onToggle={handleToggleSidebar} />
         )}
