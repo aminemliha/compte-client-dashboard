@@ -1,6 +1,8 @@
 
 import { useState, useEffect } from 'react';
 import { fetchAccountById, AccountData } from '../services/mockData';
+// Import de l'API (en commentaire jusqu'à ce que vous soyez prêt à basculer)
+// import { accountsApi } from '@/services/api';
 
 interface UseAccountDetailsState {
   account: AccountData | null;
@@ -22,7 +24,11 @@ export const useAccountDetails = (accountId: number | null) => {
       setState(prev => ({ ...prev, loading: true, error: null }));
       
       try {
+        // Utilisez les données mockées pour le moment
         const accountData = await fetchAccountById(accountId);
+        
+        // Quand vous êtes prêt à basculer vers l'API réelle, utilisez ce code à la place:
+        // const accountData = await accountsApi.getAccountById(accountId);
         
         if (!accountData) {
           setState({
