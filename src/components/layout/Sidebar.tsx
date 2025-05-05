@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Search, X, PanelLeft } from "lucide-react";
-import { useSegmentsApi, Segment } from "@/hooks/useSegmentsApi";
+// import { useSegmentsApi, Segment } from "@/hooks/useSegmentsApi";
 import { toast } from "@/components/ui/use-toast";
 
 interface SidebarProps {
@@ -18,8 +18,8 @@ const Sidebar = ({
   onToggle
 }: SidebarProps) => {
   const navigate = useNavigate();
-  const segmentsApi = useSegmentsApi();
-  const [segments, setSegments] = useState<Segment[]>([]);
+  // const segmentsApi = useSegmentsApi();
+  // const [segments, setSegments] = useState<Segment[]>([]);
   
   const [formData, setFormData] = useState({
     agenceCode: "",
@@ -31,23 +31,23 @@ const Sidebar = ({
     segment: ""
   });
   
-  useEffect(() => {
-    const loadSegments = async () => {
-      try {
-        const segmentsData = await segmentsApi.fetchSegments();
-        setSegments(segmentsData || []); // Ensure we always set an array, even if null/undefined is returned
-      } catch (error) {
-        toast({
-          title: "Erreur",
-          description: "Impossible de charger les segments",
-          variant: "destructive"
-        });
-        setSegments([]); // Set to empty array on error
-      }
-    };
+  // useEffect(() => {
+  //   const loadSegments = async () => {
+  //     try {
+  //       const segmentsData = await segmentsApi.fetchSegments();
+  //       setSegments(segmentsData || []); // Ensure we always set an array, even if null/undefined is returned
+  //     } catch (error) {
+  //       toast({
+  //         title: "Erreur",
+  //         description: "Impossible de charger les segments",
+  //         variant: "destructive"
+  //       });
+  //       setSegments([]); // Set to empty array on error
+  //     }
+  //   };
     
-    loadSegments();
-  }, []);
+  //   loadSegments();
+  // }, []);
   
   const handleChange = (field: string, value: string) => {
     setFormData({
@@ -135,7 +135,7 @@ const Sidebar = ({
           <Input id="market" placeholder="Entrer le marché" value={formData.market} onChange={e => handleChange("market", e.target.value)} />
         </div>
 
-        <div className="space-y-1">
+        {/* <div className="space-y-1">
           <Label htmlFor="segment">Segment</Label>
           <Select value={formData.segment} onValueChange={value => handleChange("segment", value)}>
             <SelectTrigger id="segment">
@@ -155,7 +155,7 @@ const Sidebar = ({
               )}
             </SelectContent>
           </Select>
-        </div>
+        </div> */}
 
         <Button type="submit" className="w-full bg-brand-orange hover:bg-brand-yellow text-white font-medium mt-4 my-[7px] py-[19px] text-base">
           <Search className="mr-2 h-4 w-4" /> Rechercher

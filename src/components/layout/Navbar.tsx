@@ -14,13 +14,13 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }: NavbarProps) => {
     <header className="w-full bg-[#ed5f49] text-white border-b border-gray-200 sticky top-0 z-50">
       <div className="flex items-center justify-between px-4 h-16">
         <div className="flex items-center">
-          <Link to="/" className="flex items-center gap-2">
+          {/* <Link to="/" className="flex items-center gap-2">
             <img 
               src="/logo-attijariwafa.png" 
               alt="Attijariwafa Bank Logo" 
               className="h-8 w-auto"
-            />
-          </Link>
+            />s
+          </Link> */}
         </div>
 
         <div className="flex items-center justify-center gap-4 md:gap-8">
