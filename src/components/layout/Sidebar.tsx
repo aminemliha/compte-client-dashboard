@@ -120,7 +120,7 @@ const Sidebar = ({
           </Select>
         </div>
 
-        <Button type="submit" className="w-full bg-brand-orange hover:bg-brand-yellow text-white font-medium mt-4">
+        <Button type="submit" className="w-full bg-brand-orange hover:bg-brand-yellow text-white font-medium mt-4 my-[7px] py-[19px] text-base">
           <Search className="mr-2 h-4 w-4" /> Rechercher
         </Button>
       </form>
