@@ -47,7 +47,7 @@ const Sidebar = ({
         </Button>
       </div>;
   }
-  return <aside className="w-64 bg-white border-r border-gray-200 p-4 transition-all duration-200 h-[calc(100vh-64px)] fixed md:relative py-0 my-0">
+  return <aside className="w-64 bg-white border-r border-gray-200 p-4 transition-all duration-200 h-[calc(100vh)] fixed md:relative py-0 my-0">
       <div className="flex justify-between items-center mb-3">
         <h2 className="font-semibold text-lg">Filtres</h2>
         <Button variant="ghost" size="icon" onClick={onToggle} className="h-8 w-8">
