@@ -1,10 +1,7 @@
-
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-
 const HomePage = () => {
-  return (
-    <div className="space-y-6">
+  return <div className="space-y-6 mx-[14px] my-[14px] px-[6px]">
       <div className="flex flex-col space-y-2">
         <h1 className="text-3xl font-bold tracking-tight">Tableau de bord</h1>
         <p className="text-muted-foreground">
@@ -49,8 +46,6 @@ const HomePage = () => {
           </CardContent>
         </Card>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default HomePage;
