@@ -104,7 +104,7 @@ const AccountDetailPage = () => {
     label: "Dernière Activité",
     value: account.lastActivity || "N/A"
   }];
-  return <div className="space-y-4 px-[8px]">
+  return <div className="space-y-4 my-[14px] px-[14px]">
       <div className="flex items-center gap-2">
         <Button variant="outline" size="sm" asChild>
           <Link to="/data">
