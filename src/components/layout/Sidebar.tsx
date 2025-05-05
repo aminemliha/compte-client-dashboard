@@ -1,10 +1,14 @@
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Search, X, PanelLeft } from "lucide-react";
+import { useSegmentsApi, Segment } from "@/hooks/useSegmentsApi";
+import { toast } from "@/components/ui/use-toast";
+
 interface SidebarProps {
   open: boolean;
   onToggle: () => void;
@@ -14,6 +18,9 @@ const Sidebar = ({
   onToggle
 }: SidebarProps) => {
   const navigate = useNavigate();
+  const segmentsApi = useSegmentsApi();
+  const [segments, setSegments] = useState<Segment[]>([]);
+  
   const [formData, setFormData] = useState({
     agenceCode: "",
     bilan: "",
@@ -23,12 +30,31 @@ const Sidebar = ({
     market: "",
     segment: ""
   });
+  
+  useEffect(() => {
+    const loadSegments = async () => {
+      try {
+        const segmentsData = await segmentsApi.fetchSegments();
+        setSegments(segmentsData);
+      } catch (error) {
+        toast({
+          title: "Erreur",
+          description: "Impossible de charger les segments",
+          variant: "destructive"
+        });
+      }
+    };
+    
+    loadSegments();
+  }, []);
+  
   const handleChange = (field: string, value: string) => {
     setFormData({
       ...formData,
       [field]: value
     });
   };
+  
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Search filters:", formData);
@@ -39,6 +65,7 @@ const Sidebar = ({
       }
     });
   };
+  
   if (!open) {
     return <div className="h-[calc(100vh-64px)] fixed md:relative">
         <Button onClick={onToggle} variant="ghost" size="icon" className="m-2">
@@ -47,6 +74,7 @@ const Sidebar = ({
         </Button>
       </div>;
   }
+  
   return <aside className="w-64 bg-white border-r border-gray-200 p-4 transition-all duration-200 h-[calc(100vh)] fixed md:relative py-0 my-0">
       <div className="flex justify-between items-center mb-3">
         <h2 className="font-semibold text-lg">Filtres</h2>
@@ -113,9 +141,17 @@ const Sidebar = ({
               <SelectValue placeholder="Sélectionner" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="premium">Premium</SelectItem>
-              <SelectItem value="standard">Standard</SelectItem>
-              <SelectItem value="basic">Basic</SelectItem>
+              {segmentsApi.loading ? (
+                <SelectItem value="loading" disabled>Chargement...</SelectItem>
+              ) : segments && segments.length > 0 ? (
+                segments.map(segment => (
+                  <SelectItem key={segment.id} value={segment.id.toString()}>
+                    {segment.name}
+                  </SelectItem>
+                ))
+              ) : (
+                <SelectItem value="none" disabled>Aucun segment disponible</SelectItem>
+              )}
             </SelectContent>
           </Select>
         </div>
@@ -126,4 +162,5 @@ const Sidebar = ({
       </form>
     </aside>;
 };
+
 export default Sidebar;
