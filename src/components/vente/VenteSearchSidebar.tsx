@@ -63,7 +63,7 @@ export const VenteSearchSidebar = ({ onSearch, open, onToggle }: VenteSearchSide
   }
 
   return (
-    <aside className="w-64 bg-white border-r border-gray-200 p-4 transition-all duration-200 h-[calc(100vh-64px)] fixed md:relative overflow-y-auto">
+    <aside className="w-64 bg-white border-r border-gray-200 p-4 transition-all duration-200 h-[calc(100vh-64px)] fixed md:relative">
       <div className="flex justify-between items-center mb-3">
         <h2 className="font-semibold text-lg">Recherche de Vente</h2>
         <Button 

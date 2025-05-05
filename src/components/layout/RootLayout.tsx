@@ -18,11 +18,11 @@ const RootLayout = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-      <div className="flex flex-1">
+      <div className="flex flex-1 mt-2">
         {shouldShowMainSidebar && (
           <Sidebar open={sidebarOpen} onToggle={handleToggleSidebar} />
         )}
-        <main className="flex-1 p-3 md:p-4 lg:p-6 transition-all duration-200 overflow-auto mt-2 md:mt-4"
+        <main className="flex-1 transition-all duration-200 overflow-auto"
               style={{ marginLeft: sidebarOpen && shouldShowMainSidebar ? "" : "0" }}>
           <Outlet />
         </main>

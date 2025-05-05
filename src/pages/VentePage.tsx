@@ -1,5 +1,6 @@
 
 import { useState } from "react";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { VenteSearchSidebar, VenteSearchParams } from "@/components/vente/VenteSearchSidebar";
 import { VenteResultsTable, VenteClient } from "@/components/vente/VenteResultsTable";
 import { VenteWelcomeContent } from "@/components/vente/VenteWelcomeContent";
@@ -55,26 +56,28 @@ const VentePage = () => {
   };
 
   return (
-    <div className="flex gap-4 mt-4">
-      {/* Custom Sidebar for Vente */}
+    <div className="flex h-full mt-2">
+      {/* Using the same sidebar structure as the home page */}
       <VenteSearchSidebar 
         onSearch={handleSearch} 
         open={sidebarOpen} 
         onToggle={handleToggleSidebar} 
       />
 
-      {/* Main content */}
-      <div className="flex-1 overflow-auto p-2 md:p-4" 
-           style={{ marginLeft: sidebarOpen ? "" : "0" }}>
-        {!hasSearched ? (
-          <VenteWelcomeContent />
-        ) : (
-          <div className="space-y-6">
-            <h1 className="text-2xl font-bold">Résultats de recherche</h1>
-            <VenteResultsTable clients={searchResults} />
-          </div>
-        )}
-      </div>
+      {/* Main content with ScrollArea for consistent scrolling behavior */}
+      <ScrollArea className="flex-1 h-[calc(100vh-80px)]">
+        <div className="p-4 md:p-6"
+             style={{ marginLeft: sidebarOpen ? "" : "0" }}>
+          {!hasSearched ? (
+            <VenteWelcomeContent />
+          ) : (
+            <div className="space-y-6">
+              <h1 className="text-2xl font-bold">Résultats de recherche</h1>
+              <VenteResultsTable clients={searchResults} />
+            </div>
+          )}
+        </div>
+      </ScrollArea>
     </div>
   );
 };
