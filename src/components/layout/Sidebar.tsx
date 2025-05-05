@@ -35,14 +35,13 @@ const Sidebar = ({
     const loadSegments = async () => {
       try {
         const segmentsData = await segmentsApi.fetchSegments();
-        setSegments(segmentsData || []); // Ensure we always set an array, even if null/undefined is returned
+        setSegments(segmentsData);
       } catch (error) {
         toast({
           title: "Erreur",
           description: "Impossible de charger les segments",
           variant: "destructive"
         });
-        setSegments([]); // Set to empty array on error
       }
     };
     
