@@ -1,3 +1,4 @@
+
 import axios from 'axios';
 
 // Créer une instance axios avec la configuration de base
@@ -37,29 +38,6 @@ export const accountsApi = {
       return response.data;
     } catch (error) {
       console.error(`Error fetching account ${id}:`, error);
-      throw error;
-    }
-  }
-};
-
-// API pour récupérer les segments
-export const segmentsApi = {
-  getSegments: async () => {
-    try {
-      const response = await api.get('/segments');
-      return response.data;
-    } catch (error) {
-      console.error('Error fetching segments:', error);
-      throw error;
-    }
-  },
-  
-  getSegmentById: async (id: number) => {
-    try {
-      const response = await api.get(`/segments/${id}`);
-      return response.data;
-    } catch (error) {
-      console.error(`Error fetching segment ${id}:`, error);
       throw error;
     }
   }
