@@ -88,7 +88,7 @@ const DataPage = () => {
     return pageNumbers;
   };
   return <div className="space-y-4 mx-[15px]">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between my-[9px]">
         <h1 className="text-2xl font-bold">Résultats de recherche</h1>
         
         <form onSubmit={handleSearch} className="flex w-full max-w-sm items-center space-x-2">
