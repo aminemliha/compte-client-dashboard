@@ -1,38 +1,25 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Search, X, PanelLeft } from "lucide-react";
+// import { useSegmentsApi, Segment } from "@/hooks/useSegmentsApi";
 import { toast } from "@/components/ui/use-toast";
-import { Combobox } from "@/components/ui/combobox";
 
 interface SidebarProps {
   open: boolean;
   onToggle: () => void;
 }
-
-// Static segments data
-const segments = [
-  { value: "1", label: "Haut de gamme" },
-  { value: "2", label: "Premium" },
-  { value: "3", label: "Standard" },
-  { value: "4", label: "Économique" },
-  { value: "5", label: "Entreprise" },
-  { value: "6", label: "PME/TPE" },
-  { value: "7", label: "Cadres supérieurs" },
-  { value: "8", label: "Professions libérales" },
-  { value: "9", label: "Étudiants" },
-  { value: "10", label: "Retraités" }
-];
-
 const Sidebar = ({
   open,
   onToggle
 }: SidebarProps) => {
   const navigate = useNavigate();
+  // const segmentsApi = useSegmentsApi();
+  // const [segments, setSegments] = useState<Segment[]>([]);
   
   const [formData, setFormData] = useState({
     agenceCode: "",
@@ -43,6 +30,24 @@ const Sidebar = ({
     market: "",
     segment: ""
   });
+  
+  // useEffect(() => {
+  //   const loadSegments = async () => {
+  //     try {
+  //       const segmentsData = await segmentsApi.fetchSegments();
+  //       setSegments(segmentsData || []); // Ensure we always set an array, even if null/undefined is returned
+  //     } catch (error) {
+  //       toast({
+  //         title: "Erreur",
+  //         description: "Impossible de charger les segments",
+  //         variant: "destructive"
+  //       });
+  //       setSegments([]); // Set to empty array on error
+  //     }
+  //   };
+    
+  //   loadSegments();
+  // }, []);
   
   const handleChange = (field: string, value: string) => {
     setFormData({
@@ -130,16 +135,27 @@ const Sidebar = ({
           <Input id="market" placeholder="Entrer le marché" value={formData.market} onChange={e => handleChange("market", e.target.value)} />
         </div>
 
-        <div className="space-y-1">
+        {/* <div className="space-y-1">
           <Label htmlFor="segment">Segment</Label>
-          <Combobox 
-            options={segments}
-            value={formData.segment}
-            onValueChange={value => handleChange("segment", value)}
-            placeholder="Sélectionner un segment"
-            emptyText="Aucun segment trouvé"
-          />
-        </div>
+          <Select value={formData.segment} onValueChange={value => handleChange("segment", value)}>
+            <SelectTrigger id="segment">
+              <SelectValue placeholder="Sélectionner" />
+            </SelectTrigger>
+            <SelectContent>
+              {segmentsApi.loading ? (
+                <SelectItem value="loading" disabled>Chargement...</SelectItem>
+              ) : segments && segments.length > 0 ? (
+                segments.map(segment => (
+                  <SelectItem key={segment.id} value={segment.id.toString()}>
+                    {segment.name}
+                  </SelectItem>
+                ))
+              ) : (
+                <SelectItem value="none" disabled>Aucun segment disponible</SelectItem>
+              )}
+            </SelectContent>
+          </Select>
+        </div> */}
 
         <Button type="submit" className="w-full bg-brand-orange hover:bg-brand-yellow text-white font-medium mt-4 my-[7px] py-[19px] text-base">
           <Search className="mr-2 h-4 w-4" /> Rechercher
