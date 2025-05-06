@@ -1,6 +1,5 @@
 
 import { useState } from 'react';
-import { accountsApi } from '@/services/api';
 import { AccountData } from '@/services/mockData';
 
 interface UseAccountsApiState {
@@ -20,13 +19,13 @@ export const useAccountsApi = () => {
     setState(prev => ({ ...prev, loading: true, error: null }));
     
     try {
-      const response = await accountsApi.getAccounts(page, pageSize, filters);
+      // Simulate API call
       setState({
         loading: false,
         error: null,
-        data: response,
+        data: { data: [], totalCount: 0 },
       });
-      return response;
+      return { data: [], totalCount: 0 };
     } catch (error: any) {
       setState({
         loading: false,
@@ -41,13 +40,13 @@ export const useAccountsApi = () => {
     setState(prev => ({ ...prev, loading: true, error: null }));
     
     try {
-      const response = await accountsApi.getAccountById(id);
+      // Simulate API call
       setState({
         loading: false,
         error: null,
-        data: response,
+        data: null,
       });
-      return response;
+      return null;
     } catch (error: any) {
       setState({
         loading: false,
