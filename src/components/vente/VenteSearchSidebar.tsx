@@ -1,9 +1,11 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Search, X, PanelLeft } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+
 export interface VenteSearchParams {
   numeroCompteSupport: string;
   codeAgence: string;
@@ -12,11 +14,13 @@ export interface VenteSearchParams {
   productCode: string;
   phase: string;
 }
+
 interface VenteSearchSidebarProps {
   onSearch: (params: VenteSearchParams) => void;
   open: boolean;
   onToggle: () => void;
 }
+
 export const VenteSearchSidebar = ({
   onSearch,
   open,
@@ -30,25 +34,32 @@ export const VenteSearchSidebar = ({
     productCode: "",
     phase: ""
   });
+
   const handleChange = (field: keyof VenteSearchParams, value: string) => {
     setSearchParams(prev => ({
       ...prev,
       [field]: value
     }));
   };
+
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     onSearch(searchParams);
   };
+
   if (!open) {
-    return <div className="h-[calc(100vh-64px)] fixed md:relative">
+    return (
+      <div className="h-[calc(100vh-64px)] fixed md:relative">
         <Button onClick={onToggle} variant="ghost" size="icon" className="m-2">
           <PanelLeft className="h-4 w-4" />
           <span className="sr-only">Ouvrir</span>
         </Button>
-      </div>;
+      </div>
+    );
   }
-  return <aside className="w-64 bg-white border-r border-gray-200 p-4 transition-all duration-200 h-[calc(100vh-64px)] fixed md:relative mx-0 py-0 my-0">
+
+  return (
+    <aside className="w-64 bg-white border-r border-gray-200 p-4 transition-all duration-200 h-[calc(100vh-64px)] fixed md:relative mx-0 py-0 my-0">
       <div className="flex justify-between items-center mb-3">
         <h2 className="font-semibold text-lg">Recherche de Vente</h2>
         <Button variant="ghost" size="icon" onClick={onToggle} className="h-8 w-8">
@@ -60,17 +71,32 @@ export const VenteSearchSidebar = ({
       <form onSubmit={handleSearch} className="space-y-2">
         <div className="space-y-1">
           <Label htmlFor="numeroCompteSupport">Numéro de Compte Support</Label>
-          <Input id="numeroCompteSupport" placeholder="Entrer le numéro" value={searchParams.numeroCompteSupport} onChange={e => handleChange("numeroCompteSupport", e.target.value)} />
+          <Input 
+            id="numeroCompteSupport" 
+            placeholder="Entrer le numéro" 
+            value={searchParams.numeroCompteSupport} 
+            onChange={e => handleChange("numeroCompteSupport", e.target.value)} 
+          />
         </div>
 
         <div className="space-y-1">
           <Label htmlFor="codeAgence">Code Agence</Label>
-          <Input id="codeAgence" placeholder="Entrer le code" value={searchParams.codeAgence} onChange={e => handleChange("codeAgence", e.target.value)} />
+          <Input 
+            id="codeAgence" 
+            placeholder="Entrer le code" 
+            value={searchParams.codeAgence} 
+            onChange={e => handleChange("codeAgence", e.target.value)} 
+          />
         </div>
 
         <div className="space-y-1">
           <Label htmlFor="clientIdHost">Client-id-Host</Label>
-          <Input id="clientIdHost" placeholder="Entrer l'ID client" value={searchParams.clientIdHost} onChange={e => handleChange("clientIdHost", e.target.value)} />
+          <Input 
+            id="clientIdHost" 
+            placeholder="Entrer l'ID client" 
+            value={searchParams.clientIdHost} 
+            onChange={e => handleChange("clientIdHost", e.target.value)} 
+          />
         </div>
 
         <div className="space-y-1">
@@ -115,9 +141,13 @@ export const VenteSearchSidebar = ({
           </Select>
         </div>
 
-        <Button type="submit" className="w-full bg-brand-orange hover:bg-brand-yellow text-white font-medium mt-4">
+        <Button 
+          type="submit" 
+          className="w-full bg-brand-orange hover:bg-brand-yellow text-white font-medium mt-4"
+        >
           <Search className="mr-2 h-4 w-4" /> Rechercher
         </Button>
       </form>
-    </aside>;
+    </aside>
+  );
 };
